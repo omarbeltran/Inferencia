@@ -9,6 +9,13 @@ package control;
  *
  * @author Omar Beltrán, Javier Esteban
  */
-public class ValidateInferenceLaw {
+public final class ValidateInferenceLaw {
     
+    private static String verifyMTT(String premise1, String premise2) {
+        return "";
+    }
+    
+    public static String getMTT(String premise1, String premise2) {
+        return verifyMTT(premise1, premise2);
+    }
 }

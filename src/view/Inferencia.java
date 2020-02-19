@@ -20,5 +20,4 @@ public class Inferencia {
         ControllerInferenceLaw CIL = new ControllerInferenceLaw();
         CIL.printAllInferenceLaw();
     }
-    
 }

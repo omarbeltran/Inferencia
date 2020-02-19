@@ -35,10 +35,19 @@ public final class ControllerInferenceLaw {
      * 
      */ 
     private void loadDefaultInferenceLaw() { 
-        InferenceLaw inferenceLaw = new InferenceLaw(1, " P-> Q ,~Q :~P", "MTT", "Modus Tollendus Tollens");
+        /*InferenceLaw inferenceLaw = new InferenceLaw(1, " P-> Q ,~Q :~P", "MTT", "Modus Tollendus Tollens");
+        if(verifyDataInferenceLaw(inferenceLaw.getIdInferenceLaw(), inferenceLaw.getInferenceLaw(), 
+                inferenceLaw.getInferenceShortName(), inferenceLaw.getInferenceName()))
+            addInferenceLaw(inferenceLaw);*/
+        InferenceLaw inferenceLaw = new InferenceLaw(1, "~P", "MTT", "Modus Tollendus Tollens");
         if(verifyDataInferenceLaw(inferenceLaw.getIdInferenceLaw(), inferenceLaw.getInferenceLaw(), 
                 inferenceLaw.getInferenceShortName(), inferenceLaw.getInferenceName()))
             addInferenceLaw(inferenceLaw);
+        
+        InferenceLaw inferenceLaw111 = new InferenceLaw(1, "T", "MTk", "Modus Tollendus Tollens");
+        if(verifyDataInferenceLaw(inferenceLaw111.getIdInferenceLaw(), inferenceLaw111.getInferenceLaw(), 
+                inferenceLaw111.getInferenceShortName(), inferenceLaw111.getInferenceName()))
+            addInferenceLaw(inferenceLaw111);
         
         InferenceLaw inferenceLaw1 = new InferenceLaw(2, " P-> Q , Q : P", "MPP", "Modus Ponendus Ponens");
         if(verifyDataInferenceLaw(inferenceLaw1.getIdInferenceLaw(), inferenceLaw1.getInferenceLaw(), 

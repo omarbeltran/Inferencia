@@ -13,88 +13,101 @@ import static java.util.regex.Pattern.matches;
  */
 public final class Validation {
     
-    /**Este mÃ©todo permite determinar si una cadena de caracteres cualesquiera estÃ¡
-     * conformada unicamente por carÃ¡cteres alfabeticos, los caracteres alfabeticos vÃ¡lidos son:
-     * - Letras mayÃºsculas [A-Z]
-     * - Letras minÃºsculas [a-z]
+    /**Este método permite determinar si una string de caracteres cualesquiera está
+     * conformada unicamente por carácteres alfabeticos, los caracteres alfabeticos válidos son:
+     * - Letras mayúsculas [A-Z]
+     * - Letras minúsculas [a-z]
      * - Caracteres especiales como:
-     *      - Vocales con acentuaciÃ³n
+     *      - Vocales con acentuación
      *      - Espacio en blanco
-     *      - Los caracteres Ã‘, Ã±
-     * @param cadena contiene la cadena de caracteres que se desea evaluar
-     * @return true si el parÃ¡metro de entrada satisface las reglas validadas
+     *      - Los caracteres Ñ, ñ
+     * @param string contiene la string de caracteres que se desea evaluar
+     * @return true si el parámetro de entrada satisface las reglas validadas
      *         false en cualquier otro caso
      */
-    public static boolean isStringName(String cadena)
+    private static boolean isStringName(String string)
     {
-        boolean flag = true;//se asume que la cadena es vÃ¡lida por tanto se deja por defecto true
+        boolean flag = true;//se asume que la string es válida por tanto se deja por defecto true
         int index;
-        for (index = 0; index < cadena.length(); index++) {
-            if((cadena.charAt(index)< 65 || cadena.charAt(index)> 90) && //LETRAS MAYUSCULAS 
-               (cadena.charAt(index)< 97 || cadena.charAt(index) > 122) &&//letras minúsculas 
-               (cadena.charAt(index) != 'ñ' && cadena.charAt(index) != 'Ñ' && //la Ñ ñ se considera caracter especial
-                cadena.charAt(index) != 'á' && cadena.charAt(index) != 'é' &&
-                cadena.charAt(index) != 'í' && cadena.charAt(index) != 'ó' &&    
-                cadena.charAt(index) != 'ú' &&//validar las vocales con tílde   
-                cadena.charAt(index) != '.' &&//el punto debe ser permitido                    
-                cadena.charAt(index) != ' ')){//el espacio en blanco debe ser permitido                   
+        for (index = 0; index < string.length(); index++) {
+            if((string.charAt(index)< 65 || string.charAt(index)> 90) && //LETRAS MAYUSCULAS 
+               (string.charAt(index)< 97 || string.charAt(index) > 122) &&//letras minúsculas 
+               (string.charAt(index) != 'ñ' && string.charAt(index) != 'Ñ' && //la Ñ ñ se considera caracter especial
+                string.charAt(index) != 'á' && string.charAt(index) != 'é' &&
+                string.charAt(index) != 'í' && string.charAt(index) != 'ó' &&    
+                string.charAt(index) != 'ú' &&//validar las vocales con tílde   
+                string.charAt(index) != '.' &&//el punto debe ser permitido                    
+                string.charAt(index) != ' ')){//el espacio en blanco debe ser permitido                   
                     flag = false;//como no cumple la regla el retorno se cambia a false
-                    index = cadena.length()+1;//cuando se encuentra un carácter inválido se debe finalizar el bucle
+                    index = string.length()+1;//cuando se encuentra un carácter inválido se debe finalizar el bucle
             }//end if 
         }//end for index 
         return flag;
     }//end isString
     
-    /**EvalÃºa si los valores contenidos en el parametro son solo digitos
+    /**
+     * Evalúa si los valores contenidos en el parámetro son solo digitos
+     * La expresión regular evalúa existencia de al menos una valor numérico
      * @param id valor que se desea verificar
      * @return true si id contiene solo digitos
      *         false en cualquier otro caso
      */
-    public static boolean isDigit(String id)
+    private static boolean isDigit(String id)
     {    
         return matches("[0-9]+",id);
     }
     
-    public static boolean isValue(String cadena)
+    private static boolean isValue(String string)
     {    
-        boolean flag = true;//se asume que la cadena es vÃ¡lida por tanto se deja por defecto true
+        boolean flag = true;//se asume que la string es válida por tanto se deja por defecto true
         int index;
-        for (index = 0; index < cadena.length(); index++) {
-            if((cadena.charAt(index) < 47 || cadena.charAt(index) > 57) && //acepta nÃºmeros
-               cadena.charAt(index) == '.'){
+        for (index = 0; index < string.length(); index++) {
+            if((string.charAt(index) < 47 || string.charAt(index) > 57) && //acepta números
+               string.charAt(index) == '.'){
                 flag = false;//como no cumple la regla el retorno se cambia a false
-                index = cadena.length()+1;//cuando se encuentra un carÃ¡cter invÃ¡lido se debe finalizar el bucle
+                index = string.length()+1;//cuando se encuentra un carÃ¡cter inválido se debe finalizar el bucle
             }    
         }
         return flag;
     }
     
-    private boolean isStringAlphaNumeric(String cadena){
-        boolean flag = true;//se asume que la cadena es vÃ¡lida por tanto se deja por defecto true
+    private boolean isStringAlphaNumeric(String string){
+        boolean flag = true;//se asume que la string es válida por tanto se deja por defecto true
         int index;
-        for (index = 0; index < cadena.length(); index++) {
-            if((cadena.charAt(index) < 47 || cadena.charAt(index) > 57) && //acepta números
-              ((cadena.charAt(index)< 65 || cadena.charAt(index)> 90) && //LETRAS MAYUSCULAS 
-               (cadena.charAt(index)< 97 || cadena.charAt(index) > 122) &&//letras minúsculas
-               (cadena.charAt(index) != 'ñ' && cadena.charAt(index) != 'Ñ' && //la Ñ ñ se considera caracter especial
-                cadena.charAt(index) != 'á' && cadena.charAt(index) != 'é' &&
-                cadena.charAt(index) != 'í' && cadena.charAt(index) != 'ó' &&    
-                cadena.charAt(index) != 'ú' &&//validar las vocales con tílde     
-                cadena.charAt(index) != '.' &&//el punto debe ser permitido                    
-                cadena.charAt(index) != ' '))){//el espacio en blanco debe ser permitido                   
+        for (index = 0; index < string.length(); index++) {
+            if((string.charAt(index) < 47 || string.charAt(index) > 57) && //acepta números
+              ((string.charAt(index)< 65 || string.charAt(index)> 90) && //LETRAS MAYUSCULAS 
+               (string.charAt(index)< 97 || string.charAt(index) > 122) &&//letras minúsculas
+               (string.charAt(index) != 'ñ' && string.charAt(index) != 'Ñ' && //la Ñ ñ se considera caracter especial
+                string.charAt(index) != 'á' && string.charAt(index) != 'é' &&
+                string.charAt(index) != 'í' && string.charAt(index) != 'ó' &&    
+                string.charAt(index) != 'ú' &&//validar las vocales con tílde     
+                string.charAt(index) != '.' &&//el punto debe ser permitido                    
+                string.charAt(index) != ' '))){//el espacio en blanco debe ser permitido                   
                     flag = false;//como no cumple la regla el retorno se cambia a false
-                    index = cadena.length()+1;//cuando se encuentra un carácter inválido se debe finalizar el bucle
+                    index = string.length()+1;//cuando se encuentra un carácter inválido se debe finalizar el bucle
             }//end if 
         }//end for index  
         return flag; 
     }
    
+    /**
+     * este metodo debe validar la expresion ingresada como ley de inferencia
+     */
+    private static boolean isSintaxisInferenceLaw(String stringLaw) {
+        return matches("[~| ]?[PQRST]",stringLaw);
+    }
+    
+    public static boolean verifyInferenceLaw(String stringLaw) {
+        return isSintaxisInferenceLaw(stringLaw);
+    }
     public static boolean verifyDataInferenceLaw(String id, String law, String shortName, String name){
         return isDigit(id) && isStringName(name) && isStringName(shortName);
     }
     
     public static boolean verifyDataInferenceLaw(int id, String law, String shortName, String name){
-        return isDigit(String.valueOf(id)) && isStringName(name) && isStringName(shortName);
+        return isDigit(String.valueOf(id)) && isStringName(name) && isStringName(shortName) &&
+                isSintaxisInferenceLaw(law);
     }
     
 }
