@@ -95,7 +95,7 @@ public final class Validation {
      * este metodo debe validar la expresion ingresada como ley de inferencia
      */
     private static boolean isSintaxisInferenceLaw(String stringLaw) {
-        return matches("[~| ]?[PQRST]",stringLaw);
+        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))((,((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))){0,2})(:((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)))"),stringLaw);
     }
     
     public static boolean verifyInferenceLaw(String stringLaw) {
