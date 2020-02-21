@@ -9,7 +9,7 @@ import static java.util.regex.Pattern.matches;
 
 /**
  *
- * @author Omar Beltrán
+ * @author Omar Beltrán, Javier Esteban
  */
 public final class Validation {
     
@@ -93,9 +93,15 @@ public final class Validation {
    
     /**
      * este metodo debe validar la expresion ingresada como ley de inferencia
+     * https://regexper.com/ para evaluar las expresiones regulares 
      */
     private static boolean isSintaxisInferenceLaw(String stringLaw) {
-        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))((,((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))){0,2})(:((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)))"),stringLaw);
+        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))((,((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))){0,2})"
+                        + "(:((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)))"),stringLaw);
+    }
+    
+    private static boolean isSintaxisPremise(String stringLaw) {
+        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))"),stringLaw);
     }
     
     public static boolean verifyInferenceLaw(String stringLaw) {
@@ -109,5 +115,15 @@ public final class Validation {
         return isDigit(String.valueOf(id)) && isStringName(name) && isStringName(shortName) &&
                 isSintaxisInferenceLaw(law);
     }
+    public static boolean verifyDataPremise(String id, String expression){
+        return isDigit(id);
+    }
     
+    public static boolean verifyDataPremise(int id, String expression){
+        return isDigit(String.valueOf(id)) && isSintaxisPremise(expression);
+    }
+    
+    public static boolean isSintaxisMPP(String stringLaw) {
+        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(~?[PQRST])"),stringLaw);
+    }
 }

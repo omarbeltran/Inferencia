@@ -6,6 +6,7 @@
 package view;
 
 import Controller.ControllerInferenceLaw;
+import Controller.ControllerPremise;
 
 /**
  *
@@ -18,6 +19,9 @@ public class Inferencia {
      */
     public static void main(String[] args) {
         ControllerInferenceLaw CIL = new ControllerInferenceLaw();
-        CIL.printAllInferenceLaw();
+        CIL.printAllInferenceLaw();//mostrar las leyes de inferencia que está aceptando
+        ControllerPremise CP = new ControllerPremise();
+        CP.printAllPremise();
+        CP.solve("P");
     }
 }

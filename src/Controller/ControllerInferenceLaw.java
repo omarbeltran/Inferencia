@@ -36,15 +36,6 @@ public final class ControllerInferenceLaw {
      */ 
     private void loadDefaultInferenceLaw() { 
         
-        InferenceLaw inferenceLaw111 = new InferenceLaw(111, "~P", "MTT", "Modus Tollendus Tollens");
-        if(verifyDataInferenceLaw(inferenceLaw111.getIdInferenceLaw(), inferenceLaw111.getInferenceLaw(), 
-                inferenceLaw111.getInferenceShortName(), inferenceLaw111.getInferenceName()))
-            addInferenceLaw(inferenceLaw111);
-        InferenceLaw inferenceLaw222 = new InferenceLaw(222, "P->~Q", "MTT", "Modus Tollendus Tollens");
-        if(verifyDataInferenceLaw(inferenceLaw222.getIdInferenceLaw(), inferenceLaw222.getInferenceLaw(), 
-                inferenceLaw222.getInferenceShortName(), inferenceLaw222.getInferenceName()))
-            addInferenceLaw(inferenceLaw222);
-        
         InferenceLaw inferenceLaw = new InferenceLaw(1, "P->Q,~Q:~P", "MTT", "Modus Tollendus Tollens");
         if(verifyDataInferenceLaw(inferenceLaw.getIdInferenceLaw(), inferenceLaw.getInferenceLaw(), 
                 inferenceLaw.getInferenceShortName(), inferenceLaw.getInferenceName()))
@@ -157,6 +148,7 @@ public final class ControllerInferenceLaw {
         {
             //recorrido del ArrayList usando un iterador
             Iterator it = inferenceLaws.iterator();
+            System.out.println("LISTADO DE LAS LEYES DE INFERENCIA ACEPTADAS");
             while(it.hasNext())
             {
                 inferenceLaw = (InferenceLaw)it.next();//casting del iterador al objeto CuentaContable
