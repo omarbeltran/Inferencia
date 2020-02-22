@@ -102,28 +102,47 @@ public final class Validation {
     
     private static boolean isSintaxisPremise(String stringLaw) {
         return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))"),stringLaw);
+    } 
+    /**-----------------------------BEGIN--------------------------------------
+     * Methods for evalue the sintaxis of regular expresions used for define 
+     * inference laws
+     -----------------------------------------------------------------------
+     * All methods contains in this block are composed by:
+     * @param stringLaw contains the string that represents the regular expression 
+     * @return true if matches, false in other cases*/
+    
+    private static boolean isSintaxisMPP(String stringLaw) {
+        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(~?[PQRST])"),stringLaw);
     }
     
+    private static boolean isSintaxisMTT(String stringLaw) {
+        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(~?[PQRST])"),stringLaw);
+    }
+    /**------------------------------END--------------------------------------*/
     public static boolean verifyInferenceLaw(String stringLaw) {
         return isSintaxisInferenceLaw(stringLaw);
     }
-    public static boolean verifyDataInferenceLaw(String id, String law, String shortName, String name){
+    public static boolean verifyDataInferenceLaw(String id, String law, String shortName, String name) {
         return isDigit(id) && isStringName(name) && isStringName(shortName);
     }
     
-    public static boolean verifyDataInferenceLaw(int id, String law, String shortName, String name){
+    public static boolean verifyDataInferenceLaw(int id, String law, String shortName, String name) {
         return isDigit(String.valueOf(id)) && isStringName(name) && isStringName(shortName) &&
                 isSintaxisInferenceLaw(law);
     }
-    public static boolean verifyDataPremise(String id, String expression){
+    public static boolean verifyDataPremise(String id, String expression) {
         return isDigit(id);
     }
     
-    public static boolean verifyDataPremise(int id, String expression){
+    public static boolean verifyDataPremise(int id, String expression) {
         return isDigit(String.valueOf(id)) && isSintaxisPremise(expression);
     }
     
-    public static boolean isSintaxisMPP(String stringLaw) {
-        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(~?[PQRST])"),stringLaw);
+    public static boolean verifySintaxisMPP(String expression) {
+        return isSintaxisMPP(expression);
+    }
+    
+    public static boolean verifySintaxisMTT(String expression) {
+        return isSintaxisMTT(expression);
     }
 }
