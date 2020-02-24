@@ -7,10 +7,11 @@ package control;
 
 import java.util.ArrayList;
 import static control.Validation.verifySintaxisMPP;
+import static control.Validation.verifySintaxisMTP;
 import static control.Validation.verifySintaxisMTT;
 /**
  *
- * @author Omar Beltrán, Javier Esteban
+ * @author Omar BeltrÃ¡n, Javier Esteban
  */
 public final class ValidateInferenceLaw {
     
@@ -59,6 +60,13 @@ public final class ValidateInferenceLaw {
                             addSolveStep(index1+1, index2+1, getMTT(premisesChanged.get(index1), premisesChanged.get(index2)),"MTT");
                         }
                     } 
+                    if(verifySintaxisMTP(premises.get(index1)+","+premises.get(index2))) {
+                        consequent = getMTP(premisesChanged.get(index1), premisesChanged.get(index2));
+                        if(consequent != null) {
+                            addSolveStep(index1+1, index2+1, getMTP(premisesChanged.get(index1), premisesChanged.get(index2)),"MTP");
+                        }
+                    }
+                    
                 }
             }
         } 
@@ -66,15 +74,15 @@ public final class ValidateInferenceLaw {
     }
     
     /**Modus Tollendo Tollens ? MTT
-     * Esta regla señala que si la implicación de premisas es verdadera y su 
+     * Esta regla seÃ±ala que si la implicaciÃ³n de premisas es verdadera y su 
      * consecuente es falso, entonces su antecedente es necesariamente falso.
      */
     private static String getMTT(String premise1, String premise2) {
-        //ALT + 175 »
+        //ALT + 175 Â»
         String consequent = null;
         boolean flag = false;
-        String [] cadenas1 = premise1.split("[»]");//obtener cada una de las proposiciones que conforman la premisa
-        String [] cadenas2 = premise2.split("[»]");//obtener cada una de las proposiciones que conforman la premisa
+        String [] cadenas1 = premise1.split("[Â»]");//obtener cada una de las proposiciones que conforman la premisa
+        String [] cadenas2 = premise2.split("[Â»]");//obtener cada una de las proposiciones que conforman la premisa
         
         if(cadenas1[1].length() > 1 && cadenas2[0].length() == 1) {
             if (cadenas2[0].compareTo(String.valueOf(cadenas1[1].charAt(1))) == 0) {
@@ -99,15 +107,27 @@ public final class ValidateInferenceLaw {
     }
     
     /**Modus Ponendo Ponens MPP
-     * Esta regla establece que si la implicación de premisas y su antecedente 
+     * Esta regla establece que si la implicaciÃ³n de premisas y su antecedente 
      * son verdaderos, su consecuente es necesariamente verdadero.
      */
     private static String getMPP(String premise1, String premise2) {
-        //ALT + 175 »
-        String [] cadenas1 = premise1.split("[»]");//obtener cada una de las proposiciones que conforman la premisa
-        String [] cadenas2 = premise2.split("[»]");//obtener cada una de las proposiciones que conforman la premisa
+        //ALT + 175 Â»
+        String [] cadenas1 = premise1.split("[Â»]");//obtener cada una de las proposiciones que conforman la premisa
+        String [] cadenas2 = premise2.split("[Â»]");//obtener cada una de las proposiciones que conforman la premisa
         
         return ((cadenas1[0].compareTo(cadenas2[0])) == 0) ? cadenas1[1] : null;
+    }
+    
+    private static String getMTP(String premise1, String premise2) {
+        boolean flag = false;
+        String consequent = null;
+        String [] cadenas1 = premise1.split("[v]");//obtener cada una de las proposiciones que conforman la premisa
+        if(premise2.length() > 1 && cadenas1[1].length() == 1) {
+            if (cadenas1[0].compareTo(String.valueOf(premise2.charAt(1))) == 0) {
+                flag = true;
+            }
+        } 
+        return flag == true ? cadenas1[1] : null;
     }
     
     private static ArrayList<String> changeSymbolIntoPremises(ArrayList<String> premises, String symbol) {
@@ -115,7 +135,7 @@ public final class ValidateInferenceLaw {
         if(!premises.isEmpty())
         {
             for(int index = 0 ; index < premises.size() ; index++) {
-                premisesChanged.add(premises.get(index).replaceFirst(symbol, "»"));//reemplazar la simbología de "entonces"
+                premisesChanged.add(premises.get(index).replaceFirst(symbol, "Â»"));//reemplazar la simbologï¿½a de "entonces"
             }
         }
         return premisesChanged;
@@ -124,4 +144,5 @@ public final class ValidateInferenceLaw {
     private static void addSolveStep(int index1, int index2, String conclusion, String inferenceLaw) {
         solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+","+index2+")");
     }
+
 }

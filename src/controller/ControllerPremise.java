@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Omar Beltrán, Javier Esteban
+ * @author Omar Beltrï¿½n, Javier Esteban
  */
 public class ControllerPremise {
     private static ArrayList<Premise> premises;
@@ -24,6 +24,7 @@ public class ControllerPremise {
     }
     
     private void loadDefaultPremise() {
+        
         Premise premise1 = new Premise(1, "P->S");
         if(verifyDataPremise(premise1.getIdPremise(), premise1.getExpression())) {
             addPremise(premise1);
@@ -73,6 +74,16 @@ public class ControllerPremise {
         if(verifyDataPremise(premise10.getIdPremise(), premise10.getExpression())) {
             addPremise(premise10);
         }
+        
+        Premise premise11 = new Premise(11, "QvT");
+        if(verifyDataPremise(premise11.getIdPremise(), premise11.getExpression())) {
+            addPremise(premise11);
+        }
+        Premise premise12 = new Premise(12, "~Q");
+        if(verifyDataPremise(premise12.getIdPremise(), premise12.getExpression())) {
+            addPremise(premise12);
+        }
+        
     }
 
     private boolean addPremise(Premise premiseNew) {
