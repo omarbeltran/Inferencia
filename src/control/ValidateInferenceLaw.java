@@ -10,6 +10,8 @@ import static control.Validation.verifySintaxisMPP;
 import static control.Validation.verifySintaxisMTP;
 import static control.Validation.verifySintaxisMTT;
 import static control.Validation.verifySintaxisLA;
+import static control.Validation.verifySintaxisLS;
+import static control.Validation.verifySintaxisLC;
 /**
  *
  * @author Omar Beltrán, Javier Esteban
@@ -73,10 +75,23 @@ public final class ValidateInferenceLaw {
                             addSolveStep(index1+1, index2+1, consequent, "LA");
                         }
                     }
+                    if(verifySintaxisLS(premises.get(index1))) {
+                        consequent = getLS(premisesChanged.get(index1));
+                        if(consequent != null) {
+                            addSolveSteps(index1+1, consequent, "LS");
+                        }
+                    }
+                    if(verifySintaxisLC(premises.get(index1)+","+premises.get(index2))) {
+                        consequent = getLC(premisesChanged.get(index1), premisesChanged.get(index2));
+                        if(consequent != null) {
+                            addSolveStep(index1+1, index2+1, consequent, "LC");
+                        }
+                    }
                 }
             }
         } 
         return solveSteps;
+      
     }
     
     /**Modus Tollendo Tollens ? MTT
@@ -140,6 +155,19 @@ public final class ValidateInferenceLaw {
         return premise1+"v"+premise2;
     }
     
+    private static String getLS(String premise1) {
+        String [] cadena1 = premise1.split("[»]");
+        return cadena1[0];
+    }
+    
+    private static String getLC(String premise1, String premise2) {
+        //ALT + 175 »
+        String [] cadenas1 = premise1.split("[»]");
+        String [] cadenas2 = premise2.split("[»]");
+        
+        return premise1+"^"+"("+premise2+")";
+    }
+    
     private static ArrayList<String> changeSymbolIntoPremises(ArrayList<String> premises, String symbol) {
         ArrayList<String> premisesChanged = new ArrayList<>();
         if(!premises.isEmpty())
@@ -154,5 +182,7 @@ public final class ValidateInferenceLaw {
     private static void addSolveStep(int index1, int index2, String conclusion, String inferenceLaw) {
         solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+","+index2+")");
     }
-   
+   private static void addSolveSteps(int index1, String conclusion, String inferenceLaw) {
+        solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+")");
+    }
 }
