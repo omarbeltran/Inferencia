@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import static control.Validation.verifySintaxisMPP;
 import static control.Validation.verifySintaxisMTP;
 import static control.Validation.verifySintaxisMTT;
+import static control.Validation.verifySintaxisLA;
 /**
  *
  * @author Omar Beltrán, Javier Esteban
@@ -51,22 +52,27 @@ public final class ValidateInferenceLaw {
                     if(verifySintaxisMPP(premises.get(index1)+","+premises.get(index2))) {
                         consequent = getMPP(premisesChanged.get(index1), premisesChanged.get(index2));
                         if(consequent != null) {
-                            addSolveStep(index1+1, index2+1, getMPP(premisesChanged.get(index1), premisesChanged.get(index2)),"MPP");
+                            addSolveStep(index1+1, index2+1, consequent, "MPP");
                         }
                     }    
                     if(verifySintaxisMTT(premises.get(index1)+","+premises.get(index2))) {
                         consequent = getMTT(premisesChanged.get(index1), premisesChanged.get(index2));
                         if(consequent != null) {
-                            addSolveStep(index1+1, index2+1, getMTT(premisesChanged.get(index1), premisesChanged.get(index2)),"MTT");
+                            addSolveStep(index1+1, index2+1, consequent, "MTT");
                         }
                     } 
                     if(verifySintaxisMTP(premises.get(index1)+","+premises.get(index2))) {
                         consequent = getMTP(premisesChanged.get(index1), premisesChanged.get(index2));
                         if(consequent != null) {
-                            addSolveStep(index1+1, index2+1, getMTP(premisesChanged.get(index1), premisesChanged.get(index2)),"MTP");
+                            addSolveStep(index1+1, index2+1, consequent, "MTP");
                         }
                     }
-                    
+                    if(verifySintaxisLA(premises.get(index1)+","+premises.get(index2))) {
+                        consequent = getLA(premisesChanged.get(index1), premisesChanged.get(index2));
+                        if(consequent != null) {
+                            addSolveStep(index1+1, index2+1, consequent, "LA");
+                        }
+                    }
                 }
             }
         } 
@@ -130,6 +136,10 @@ public final class ValidateInferenceLaw {
         return flag == true ? cadenas1[1] : null;
     }
     
+    private static String getLA(String premise1, String premise2) {
+        return premise1+"v"+premise2;
+    }
+    
     private static ArrayList<String> changeSymbolIntoPremises(ArrayList<String> premises, String symbol) {
         ArrayList<String> premisesChanged = new ArrayList<>();
         if(!premises.isEmpty())
@@ -144,5 +154,5 @@ public final class ValidateInferenceLaw {
     private static void addSolveStep(int index1, int index2, String conclusion, String inferenceLaw) {
         solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+","+index2+")");
     }
-
+   
 }

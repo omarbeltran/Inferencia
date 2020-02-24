@@ -123,6 +123,9 @@ public final class Validation {
         return matches(("(^[PQRST])((v)([PQRST]))(,)(~[PQRST])"),stringLaw);
     }
     
+    private static boolean isSintaxisLA(String stringLaw) {
+        return matches(("(^~?[PQRST])(,)(~?[PQRST])"),stringLaw);
+    }
     /**------------------------------END--------------------------------------*/
     public static boolean verifyInferenceLaw(String stringLaw) {
         return isSintaxisInferenceLaw(stringLaw);
@@ -154,4 +157,9 @@ public final class Validation {
     public static boolean verifySintaxisMTP(String expression) {
         return isSintaxisMTP(expression);
     }
+    
+    public static boolean verifySintaxisLA(String expression) {
+        return isSintaxisLA(expression);
+    }
 }
+
