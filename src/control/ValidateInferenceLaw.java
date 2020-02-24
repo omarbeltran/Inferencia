@@ -44,7 +44,33 @@ public final class ValidateInferenceLaw {
         return "";
     }
     
-    public static ArrayList<String> solveInference(ArrayList<String> premises, String conclusion) {
+    public static ArrayList<String> solveInference(ArrayList<String> premises, String conclusion){
+        solveInferenceOnePremise(premises, conclusion);
+        solveInferenceTwoPremise(premises, conclusion);
+        
+        return solveSteps;
+    }
+    
+    public static void solveInferenceOnePremise(ArrayList<String> premises, String conclusion) {
+        ArrayList<String> premisesChanged = changeSymbolIntoPremises(premises, "->");
+        String consequent = null;
+        if(!premises.isEmpty())
+        {
+            for(int index1 = 0 ; index1 < (premisesChanged.size()) ; index1++)
+                if(verifySintaxisLS(premises.get(index1))) {
+                        consequent = getLS(premisesChanged.get(index1));
+                        if(consequent != null) {
+                            addSolveSteps(index1+1, consequent, "LS");
+                        }
+                }
+            }
+        
+    }
+    
+    
+  
+    
+    public static void solveInferenceTwoPremise(ArrayList<String> premises, String conclusion) {
         ArrayList<String> premisesChanged = changeSymbolIntoPremises(premises, "->");
         String consequent = null;
         if(!premises.isEmpty())
@@ -75,12 +101,6 @@ public final class ValidateInferenceLaw {
                             addSolveStep(index1+1, index2+1, consequent, "LA");
                         }
                     }
-                    if(verifySintaxisLS(premises.get(index1))) {
-                        consequent = getLS(premisesChanged.get(index1));
-                        if(consequent != null) {
-                            addSolveSteps(index1+1, consequent, "LS");
-                        }
-                    }
                     if(verifySintaxisLC(premises.get(index1)+","+premises.get(index2))) {
                         consequent = getLC(premisesChanged.get(index1), premisesChanged.get(index2));
                         if(consequent != null) {
@@ -90,7 +110,7 @@ public final class ValidateInferenceLaw {
                 }
             }
         } 
-        return solveSteps;
+        
       
     }
     
@@ -156,8 +176,8 @@ public final class ValidateInferenceLaw {
     }
     
     private static String getLS(String premise1) {
-        String [] cadena1 = premise1.split("[»]");
-        return cadena1[0];
+        String [] cadena1 = premise1.split("[\\^]");
+        return cadena1[1];
     }
     
     private static String getLC(String premise1, String premise2) {
@@ -182,7 +202,7 @@ public final class ValidateInferenceLaw {
     private static void addSolveStep(int index1, int index2, String conclusion, String inferenceLaw) {
         solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+","+index2+")");
     }
-   private static void addSolveSteps(int index1, String conclusion, String inferenceLaw) {
+    private static void addSolveSteps(int index1, String conclusion, String inferenceLaw) {
         solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+")");
     }
 }

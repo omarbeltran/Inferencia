@@ -126,8 +126,9 @@ public final class Validation {
     private static boolean isSintaxisLA(String stringLaw) {
         return matches(("(^~?[PQRST])(,)(~?[PQRST])"),stringLaw);
     }
-     private static boolean isSintaxisLS(String stringLaw) {
-        return matches(("(^[PQRST])((^)([PQRST]))"),stringLaw);
+    
+    private static boolean isSintaxisLS(String stringLaw) {
+        return matches(("^[PQRST](\\^)([PQRST])"),stringLaw);
     }
     private static boolean isSintaxisLC(String stringLaw) {
         return matches(("(^~[PQRST])(,)(([PQRST])(v)([PQRST]))"),stringLaw);
