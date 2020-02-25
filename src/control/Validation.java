@@ -97,7 +97,7 @@ public final class Validation {
      */
     private static boolean isSintaxisInferenceLaw(String stringLaw) {                
         return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))((,((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))){0,2})(:((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)))"),stringLaw)||
-               matches("(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)",stringLaw);
+               matches("(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(,(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?))(:(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?))",stringLaw);
     }
     
     private static boolean isSintaxisPremise(String stringLaw) {
@@ -144,8 +144,11 @@ public final class Validation {
     }
     
     private static boolean isSintaxisSH(String stringLaw) {
-        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(^~?[PQRST])((->)(~?[PQRST]))"),stringLaw) ||
-               matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(^\\((~?[PQRST])((\\^)(~?[PQRST]))\\)$)((->)(~?[PQRST]))"),stringLaw);
+        return matches("(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(,(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?))(:(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?))",stringLaw);
+    }
+    
+    private static boolean isSintaxisDC(String stringLaw) {
+        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(^~?[PQRST])((->)(~?[PQRST]))(,)(^~?[PQRST])((v)(~?[PQRST]))"),stringLaw);
     }
     //------------------------------END-------------------------------------
     /** 
@@ -204,6 +207,10 @@ public final class Validation {
     
     public static boolean verifySintaxisSH(String expression) {
         return isSintaxisSH(expression);
+    }
+    
+    public static boolean verifySintaxisDC(String expression) {
+        return isSintaxisDC(expression);
     }
 }
 

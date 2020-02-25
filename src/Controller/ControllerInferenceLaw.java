@@ -83,7 +83,7 @@ public final class ControllerInferenceLaw {
                 inferenceLaw8.getInferenceShortName(), inferenceLaw8.getInferenceName()))
             addInferenceLaw(inferenceLaw8);
         
-        InferenceLaw inferenceLaw9 = new InferenceLaw(10, "P:PvQ", "LA", "Ley de la Adici�n");
+        InferenceLaw inferenceLaw9 = new InferenceLaw(10, "P:PvQ", "LA", "Ley de la Adición");
         if(verifyDataInferenceLaw(inferenceLaw9.getIdInferenceLaw(), inferenceLaw9.getInferenceLaw(), 
                 inferenceLaw9.getInferenceShortName(), inferenceLaw9.getInferenceName()))
             addInferenceLaw(inferenceLaw9);
@@ -93,10 +93,16 @@ public final class ControllerInferenceLaw {
                 inferenceLaw10.getInferenceShortName(), inferenceLaw10.getInferenceName()))
             addInferenceLaw(inferenceLaw10);
         
-        InferenceLaw inferenceLaw11 = new InferenceLaw(12, "(P->S)->(~RvT)", "SH", "SH PRUEBA");
+        InferenceLaw inferenceLaw11 = new InferenceLaw(12, "~R->~Q,(S^P)->~R:(S^P)->~Q", "SH", "Silogismo Hipotético");
         if(verifyDataInferenceLaw(inferenceLaw11.getIdInferenceLaw(), inferenceLaw11.getInferenceLaw(), 
                 inferenceLaw11.getInferenceShortName(), inferenceLaw11.getInferenceName()))
             addInferenceLaw(inferenceLaw11);
+        
+        InferenceLaw inferenceLaw12 = new InferenceLaw(13, "(S^P)->~R", "SH", "SH PRUEBA");
+        if(verifyDataInferenceLaw(inferenceLaw12.getIdInferenceLaw(), inferenceLaw12.getInferenceLaw(), 
+                inferenceLaw12.getInferenceShortName(), inferenceLaw12.getInferenceName()))
+            addInferenceLaw(inferenceLaw12);
+        
     }
     
     private boolean addInferenceLaw(InferenceLaw inferenceLawNew) {

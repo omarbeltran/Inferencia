@@ -13,6 +13,7 @@ import static control.Validation.verifySintaxisLA;
 import static control.Validation.verifySintaxisLS;
 import static control.Validation.verifySintaxisLC;
 import static control.Validation.verifySintaxisConm;
+import static control.Validation.verifySintaxisDC;
 import static control.Validation.verifySintaxisLDS;
 /**
  *
@@ -121,6 +122,21 @@ public final class ValidateInferenceLaw {
         } 
     }
     
+     public static void solveInferenceThreePremise(ArrayList<String> premises, String conclusion) {
+        ArrayList<String> premisesChanged = changeSymbolIntoPremises(premises, "->");
+        String consequent = null;
+        if(!premises.isEmpty()) {
+            for(int index1 = 0 ; index1 < (premisesChanged.size())-2 ; index1++) {
+                for(int index2 = index1+1 ; index2 < (premisesChanged.size())-1 ; index2++) {
+                    for(int index3 = index2+1 ; index3 < (premisesChanged.size()) ; index3++) {
+                        if(verifySintaxisDC(premises.get(index1)+","+premises.get(index2)+","+premises.get(index3))) {
+                            
+                        }    
+                    }
+                }
+            }
+        }
+     }    
     /**Modus Tollendo Tollens ? MTT
      * Esta regla señala que si la implicación de premisas es verdadera y su 
      * consecuente es falso, entonces su antecedente es necesariamente falso.
