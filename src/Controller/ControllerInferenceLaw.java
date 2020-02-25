@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Omar Beltr醤, Javier Esteban
+ * @author Omar Beltr谩n, Javier Esteban
  */
 public final class ControllerInferenceLaw {
     
@@ -51,29 +51,29 @@ public final class ControllerInferenceLaw {
                 inferenceLaw2.getInferenceShortName(), inferenceLaw2.getInferenceName()))
             addInferenceLaw(inferenceLaw2);
         
-        InferenceLaw inferenceLaw3 = new InferenceLaw(4, "P,Q:PvQ", "LA", "Ley de la Adjunci髇");
+        InferenceLaw inferenceLaw3 = new InferenceLaw(4, "P,Q:PvQ", "LA", "Ley de la Adjunci贸n");
         if(verifyDataInferenceLaw(inferenceLaw3.getIdInferenceLaw(), inferenceLaw3.getInferenceLaw(), 
                 inferenceLaw3.getInferenceShortName(), inferenceLaw3.getInferenceName()))
             addInferenceLaw(inferenceLaw3);
         
         //(P) LA SINTAIX AUN NO EVALUA ESTA CADENA
-        InferenceLaw inferenceLaw4 = new InferenceLaw(5, "~R,PvQ:~R^(PvQ)", "LC", "Ley de Conjunci髇");
+        InferenceLaw inferenceLaw4 = new InferenceLaw(5, "~R,PvQ:~R^(PvQ)", "LC", "Ley de Conjunci贸n");
         if(verifyDataInferenceLaw(inferenceLaw4.getIdInferenceLaw(), inferenceLaw4.getInferenceLaw(), 
                 inferenceLaw4.getInferenceShortName(), inferenceLaw4.getInferenceName()))
             addInferenceLaw(inferenceLaw4);
         
-        InferenceLaw inferenceLaw5 = new InferenceLaw(6, "P^Q:P", "LS", "Ley de la Simplificaci髇");
+        InferenceLaw inferenceLaw5 = new InferenceLaw(6, "P^Q:P", "LS", "Ley de la Simplificaci贸n");
         if(verifyDataInferenceLaw(inferenceLaw5.getIdInferenceLaw(), inferenceLaw5.getInferenceLaw(), 
                 inferenceLaw5.getInferenceShortName(), inferenceLaw5.getInferenceName()))
             addInferenceLaw(inferenceLaw5);
         
-        InferenceLaw inferenceLaw6 = new InferenceLaw(7, "P->Q,Q->R:P->R", "SH", "Silogismo Hipot閠ico");
+        InferenceLaw inferenceLaw6 = new InferenceLaw(7, "P->Q,Q->R:P->R", "SH", "Silogismo Hipot茅tico");
         if(verifyDataInferenceLaw(inferenceLaw6.getIdInferenceLaw(), inferenceLaw6.getInferenceLaw(), 
                 inferenceLaw6.getInferenceShortName(), inferenceLaw6.getInferenceName()))
             addInferenceLaw(inferenceLaw6);
         
         InferenceLaw inferenceLaw7 = new InferenceLaw(8, "P^Q:Q^P", "C", "Conmutativa");
-        //OJO!!!!!! esta ley aplica tanto para conjunci髇 como para disyunci髇
+        //OJO!!!!!! esta ley aplica tanto para conjunci贸n como para disyunci贸n
         if(verifyDataInferenceLaw(inferenceLaw7.getIdInferenceLaw(), inferenceLaw7.getInferenceLaw(), 
                 inferenceLaw7.getInferenceShortName(), inferenceLaw7.getInferenceName()))
             addInferenceLaw(inferenceLaw7);
@@ -83,7 +83,7 @@ public final class ControllerInferenceLaw {
                 inferenceLaw8.getInferenceShortName(), inferenceLaw8.getInferenceName()))
             addInferenceLaw(inferenceLaw8);
         
-        InferenceLaw inferenceLaw9 = new InferenceLaw(10, "P:PvQ", "LA", "Ley de la Adici髇");
+        InferenceLaw inferenceLaw9 = new InferenceLaw(10, "P:PvQ", "LA", "Ley de la Adici锟絥");
         if(verifyDataInferenceLaw(inferenceLaw9.getIdInferenceLaw(), inferenceLaw9.getInferenceLaw(), 
                 inferenceLaw9.getInferenceShortName(), inferenceLaw9.getInferenceName()))
             addInferenceLaw(inferenceLaw9);
@@ -92,19 +92,21 @@ public final class ControllerInferenceLaw {
         if(verifyDataInferenceLaw(inferenceLaw10.getIdInferenceLaw(), inferenceLaw10.getInferenceLaw(), 
                 inferenceLaw10.getInferenceShortName(), inferenceLaw10.getInferenceName()))
             addInferenceLaw(inferenceLaw10);
+        
+        InferenceLaw inferenceLaw11 = new InferenceLaw(12, "(P->S)->(~RvT)", "SH", "SH PRUEBA");
+        if(verifyDataInferenceLaw(inferenceLaw11.getIdInferenceLaw(), inferenceLaw11.getInferenceLaw(), 
+                inferenceLaw11.getInferenceShortName(), inferenceLaw11.getInferenceName()))
+            addInferenceLaw(inferenceLaw11);
     }
     
-    private boolean addInferenceLaw(InferenceLaw inferenceLawNew)
-    {
+    private boolean addInferenceLaw(InferenceLaw inferenceLawNew) {
         boolean flag = false;
         if(inferenceLaws.isEmpty()){
             inferenceLaws.add(inferenceLawNew);
             flag = true;
         }    
-        else
-        {
-            for (int index = 0; index < inferenceLaws.size() ; index++)
-            {
+        else {
+            for (int index = 0; index < inferenceLaws.size() ; index++) {
                 if(findInferenceLawById(inferenceLawNew.getIdInferenceLaw()) == null)
                 {//if not exist, agree person
                    inferenceLaws.add(inferenceLawNew);
@@ -116,23 +118,18 @@ public final class ControllerInferenceLaw {
         return flag;
     }
     
-    private static InferenceLaw findInferenceLawById(int id)
-    {      
+    private static InferenceLaw findInferenceLawById(int id) {      
         InferenceLaw inferenceLaw;
         //se esta insertando el primer registro
-        if(inferenceLaws.isEmpty())
-        {
+        if(inferenceLaws.isEmpty()) {
             return null;
         }    
-        else
-        {
+        else {
             //recorrido del ArrayList usando un iterador
             Iterator it = inferenceLaws.iterator();
-            while(it.hasNext())
-            {
+            while(it.hasNext()) {
                 inferenceLaw = (InferenceLaw)it.next();//casting del iterador al objeto InferenceLaw
-                if(inferenceLaw.getIdInferenceLaw()== id)
-                {
+                if(inferenceLaw.getIdInferenceLaw()== id) {
                     return inferenceLaw;
                 }    
             }    
@@ -140,17 +137,14 @@ public final class ControllerInferenceLaw {
         return null;
     }
     
-    public void printAllInferenceLaw()
-    {      
+    public void printAllInferenceLaw() {      
         InferenceLaw inferenceLaw;
         //se esta insertando el primer registro
-        if(!inferenceLaws.isEmpty())
-        {
+        if(!inferenceLaws.isEmpty()) {
             //recorrido del ArrayList usando un iterador
             Iterator it = inferenceLaws.iterator();
             System.out.println("LISTADO DE LAS LEYES DE INFERENCIA ACEPTADAS");
-            while(it.hasNext())
-            {
+            while(it.hasNext()) {
                 inferenceLaw = (InferenceLaw)it.next();//casting del iterador al objeto CuentaContable
                 System.out.print(inferenceLaw.getIdInferenceLaw()+"\t");
                 System.out.print(inferenceLaw.getInferenceLaw()+"\t");

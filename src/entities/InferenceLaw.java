@@ -7,7 +7,7 @@ package entities;
 
 /**
  *
- * @author Omar Beltr·n, Javier Esteban
+ * @author Omar Beltr√°n, Javier Esteban
  */
 public class InferenceLaw {
 

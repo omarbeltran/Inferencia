@@ -7,7 +7,7 @@ package entities;
 
 /**
  *
- * @author Omar Beltrán, Javier Esteban
+ * @author Omar BeltrÃ¡n, Javier Esteban
  */
 public class Premise {
 

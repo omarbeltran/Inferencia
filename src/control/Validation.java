@@ -95,9 +95,9 @@ public final class Validation {
      * este metodo debe validar la expresion ingresada como ley de inferencia
      * https://regexper.com/ para evaluar las expresiones regulares 
      */
-    private static boolean isSintaxisInferenceLaw(String stringLaw) {
-        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))((,((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))){0,2})"
-                        + "(:((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)))"),stringLaw);
+    private static boolean isSintaxisInferenceLaw(String stringLaw) {                
+        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))((,((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))){0,2})(:((~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)))"),stringLaw)||
+               matches("(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(->|v|\\^)(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)",stringLaw);
     }
     
     private static boolean isSintaxisPremise(String stringLaw) {
@@ -141,6 +141,11 @@ public final class Validation {
     
     private static boolean isSintaxisLDS(String stringLaw) {
         return matches(("^[PQRST](v)([PQRST])"),stringLaw);
+    }
+    
+    private static boolean isSintaxisSH(String stringLaw) {
+        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(^~?[PQRST])((->)(~?[PQRST]))"),stringLaw) ||
+               matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(^\\((~?[PQRST])((\\^)(~?[PQRST]))\\)$)((->)(~?[PQRST]))"),stringLaw);
     }
     //------------------------------END-------------------------------------
     /** 
@@ -195,6 +200,10 @@ public final class Validation {
     
     public static boolean verifySintaxisLDS(String expression) {
         return isSintaxisLDS(expression);
+    }
+    
+    public static boolean verifySintaxisSH(String expression) {
+        return isSintaxisSH(expression);
     }
 }
 

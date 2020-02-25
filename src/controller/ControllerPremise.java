@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Omar Beltr�n, Javier Esteban
+ * @author Omar Beltrán, Javier Esteban
  */
 public class ControllerPremise {
     private static ArrayList<Premise> premises;
@@ -79,13 +79,25 @@ public class ControllerPremise {
         if(verifyDataPremise(premise11.getIdPremise(), premise11.getExpression())) {
             addPremise(premise11);
         }
+        
         Premise premise12 = new Premise(12, "~Q");
         if(verifyDataPremise(premise12.getIdPremise(), premise12.getExpression())) {
             addPremise(premise12);
         }
+        
         Premise premise13 = new Premise(13, "P");
         if(verifyDataPremise(premise13.getIdPremise(), premise13.getExpression())) {
             addPremise(premise13);
+        }
+        
+        Premise premise14 = new Premise(14, "~R->~Q");
+        if(verifyDataPremise(premise14.getIdPremise(), premise14.getExpression())) {
+            addPremise(premise14);
+        }
+        
+        Premise premise15 = new Premise(15, "(S^P)->~R");
+        if(verifyDataPremise(premise15.getIdPremise(), premise15.getExpression())) {
+            addPremise(premise15);
         }
     }
 
@@ -95,12 +107,9 @@ public class ControllerPremise {
             premises.add(premiseNew);
             flag = true;
         }    
-        else
-        {
-            for (int index = 0; index < premises.size() ; index++)
-            {
-                if(findPremiseById(premiseNew.getIdPremise()) == null)
-                {//if not exist, agree person
+        else {
+            for (int index = 0; index < premises.size() ; index++) {
+                if(findPremiseById(premiseNew.getIdPremise()) == null) {//if not exist, agree premise
                    premises.add(premiseNew);
                    flag = true;
                    index = premises.size();
@@ -110,23 +119,18 @@ public class ControllerPremise {
         return flag;
     }
     
-    private static Premise findPremiseById(int id)
-    {      
+    private static Premise findPremiseById(int id) {      
         Premise premise;
         //se esta insertando el primer registro
-        if(premises.isEmpty())
-        {
+        if(premises.isEmpty()) {
             return null;
         }    
-        else
-        {
+        else {
             //recorrido del ArrayList usando un iterador
             Iterator it = premises.iterator();
-            while(it.hasNext())
-            {
+            while(it.hasNext()) {
                 premise = (Premise)it.next();//casting del iterador al objeto Premise
-                if(premise.getIdPremise()== id)
-                {
+                if(premise.getIdPremise()== id) {
                     return premise;
                 }    
             }    
@@ -134,17 +138,14 @@ public class ControllerPremise {
         return null;
     }
     
-    public void printAllPremise()
-    {      
+    public void printAllPremise() {      
         Premise premise;
         //se esta insertando el primer registro
-        if(!premises.isEmpty())
-        {
+        if(!premises.isEmpty()) {
             //recorrido del ArrayList usando un iterador
             Iterator it = premises.iterator();
             System.out.println("\n\nLISTADO DE LAS PREMISAS ACEPTADAS");
-            while(it.hasNext())
-            {
+            while(it.hasNext()) {
                 premise = (Premise)it.next();//casting del iterador al objeto Premise
                 System.out.print(premise.getIdPremise()+"\t");
                 System.out.print(premise.getExpression()+"\n");
@@ -156,8 +157,7 @@ public class ControllerPremise {
         ArrayList<String> premisesString = new ArrayList<>();
         Premise premise;
         Iterator it = premises.iterator();
-        while(it.hasNext())
-        {
+        while(it.hasNext()) {
             premise = (Premise)it.next();//casting del iterador al objeto Premise
             premisesString.add(premise.getExpression());
         }    
@@ -167,5 +167,4 @@ public class ControllerPremise {
             System.out.println(solveSteps.get(index));
         }
     }
-    
 }

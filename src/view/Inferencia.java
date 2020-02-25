@@ -10,7 +10,7 @@ import Controller.ControllerPremise;
 
 /**
  *
- * @author Omar Beltrán, Javier Esteban
+ * @author Omar BeltrÃ¡n, Javier Esteban
  */
 public class Inferencia {
 
@@ -19,7 +19,7 @@ public class Inferencia {
      */
     public static void main(String[] args) {
         ControllerInferenceLaw CIL = new ControllerInferenceLaw();
-        CIL.printAllInferenceLaw();//mostrar las leyes de inferencia que está aceptando
+        CIL.printAllInferenceLaw();//mostrar las leyes de inferencia que estï¿½ aceptando
         ControllerPremise CP = new ControllerPremise();
         CP.printAllPremise();
         CP.solve("P");
