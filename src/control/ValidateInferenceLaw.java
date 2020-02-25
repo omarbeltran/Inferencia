@@ -12,6 +12,7 @@ import static control.Validation.verifySintaxisMTT;
 import static control.Validation.verifySintaxisLA;
 import static control.Validation.verifySintaxisLS;
 import static control.Validation.verifySintaxisLC;
+import static control.Validation.verifySintaxisConm;
 /**
  *
  * @author Omar Beltrán, Javier Esteban
@@ -56,15 +57,21 @@ public final class ValidateInferenceLaw {
         String consequent = null;
         if(!premises.isEmpty())
         {
-            for(int index1 = 0 ; index1 < (premisesChanged.size()) ; index1++)
+            for(int index1 = 0 ; index1 < (premisesChanged.size()) ; index1++){
                 if(verifySintaxisLS(premises.get(index1))) {
                         consequent = getLS(premisesChanged.get(index1));
                         if(consequent != null) {
                             addSolveSteps(index1+1, consequent, "LS");
                         }
                 }
+                if(verifySintaxisConm(premises.get(index1))) {
+                        consequent = getConm(premisesChanged.get(index1));
+                        if(consequent != null) {
+                            addSolveSteps(index1+1, consequent, "Conmutativa");
+                        }
+                }
             }
-        
+        }
     }
     
     
@@ -186,6 +193,13 @@ public final class ValidateInferenceLaw {
         String [] cadenas2 = premise2.split("[»]");
         
         return premise1+"^"+"("+premise2+")";
+    }
+    
+    private static String getConm(String premise1) {
+        //ALT + 175 »
+        String [] cadenas1 = premise1.split("[v]");
+        
+        return cadenas1[1]+"v"+cadenas1[0];
     }
     
     private static ArrayList<String> changeSymbolIntoPremises(ArrayList<String> premises, String symbol) {

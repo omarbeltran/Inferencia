@@ -44,7 +44,7 @@ public class ControllerPremise {
         if(verifyDataPremise(premise4.getIdPremise(), premise4.getExpression())) {
             addPremise(premise4);
         }
-        
+             
         Premise premise5 = new Premise(5, "R^T");
         if(verifyDataPremise(premise5.getIdPremise(), premise5.getExpression())) {
             addPremise(premise5);
@@ -83,7 +83,10 @@ public class ControllerPremise {
         if(verifyDataPremise(premise12.getIdPremise(), premise12.getExpression())) {
             addPremise(premise12);
         }
-        
+        Premise premise13 = new Premise(13, "P");
+        if(verifyDataPremise(premise13.getIdPremise(), premise13.getExpression())) {
+            addPremise(premise13);
+        }
     }
 
     private boolean addPremise(Premise premiseNew) {
