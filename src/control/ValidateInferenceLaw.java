@@ -56,39 +56,34 @@ public final class ValidateInferenceLaw {
     public static void solveInferenceOnePremise(ArrayList<String> premises, String conclusion) {
         ArrayList<String> premisesChanged = changeSymbolIntoPremises(premises, "->");
         String consequent = null;
-        if(!premises.isEmpty())
-        {
+        if(!premises.isEmpty()) {
             for(int index1 = 0 ; index1 < (premisesChanged.size()) ; index1++){
                 if(verifySintaxisLS(premises.get(index1))) {
-                        consequent = getLS(premisesChanged.get(index1));
-                        if(consequent != null) {
-                            addSolveSteps(index1+1, consequent, "LS");
-                        }
+                    consequent = getLS(premisesChanged.get(index1));
+                    if(consequent != null) {
+                        addSolveSteps(index1+1, consequent, "LS");
+                    }
                 }
                 if(verifySintaxisConm(premises.get(index1))) {
-                        consequent = getConm(premisesChanged.get(index1));
-                        if(consequent != null) {
-                            addSolveSteps(index1+1, consequent, "Conmutativa");
-                        }
+                    consequent = getConm(premisesChanged.get(index1));
+                    if(consequent != null) {
+                        addSolveSteps(index1+1, consequent, "Conmutativa");
+                    }
                 }
                 if(verifySintaxisLDS(premises.get(index1))) {
-                        consequent = getLDS(premisesChanged.get(index1));
-                        if(consequent != null) {
-                            addSolveSteps(index1+1, consequent, "LDS");
-                        }
+                    consequent = getLDS(premisesChanged.get(index1));
+                    if(consequent != null) {
+                        addSolveSteps(index1+1, consequent, "LDS");
+                    }
                 }
             }
         }
     }
-    
-    
-  
-    
+
     public static void solveInferenceTwoPremise(ArrayList<String> premises, String conclusion) {
         ArrayList<String> premisesChanged = changeSymbolIntoPremises(premises, "->");
         String consequent = null;
-        if(!premises.isEmpty())
-        {
+        if(!premises.isEmpty()) {
             for(int index1 = 0 ; index1 < (premisesChanged.size())-1 ; index1++) {
                 for(int index2 = index1+1 ; index2 < (premisesChanged.size()) ; index2++) {
                     if(verifySintaxisMPP(premises.get(index1)+","+premises.get(index2))) {
@@ -124,8 +119,6 @@ public final class ValidateInferenceLaw {
                 }
             }
         } 
-        
-      
     }
     
     /**Modus Tollendo Tollens ? MTT
@@ -175,7 +168,6 @@ public final class ValidateInferenceLaw {
     
     private static String getMTP(String premise1, String premise2) {
         boolean flag = false;
-        String consequent = null;
         String [] cadenas1 = premise1.split("[v]");//obtener cada una de las proposiciones que conforman la premisa
         if(premise2.length() > 1 && cadenas1[1].length() == 1) {
             if (cadenas1[0].compareTo(String.valueOf(premise2.charAt(1))) == 0) {
@@ -195,32 +187,22 @@ public final class ValidateInferenceLaw {
     }
     
     private static String getLC(String premise1, String premise2) {
-        //ALT + 175 »
-        String [] cadenas1 = premise1.split("[»]");
-        String [] cadenas2 = premise2.split("[»]");
-        
         return premise1+"^"+"("+premise2+")";
     }
     
     private static String getConm(String premise1) {
-        //ALT + 175 »
         String [] cadenas1 = premise1.split("[v]");
-        
         return cadenas1[1]+"v"+cadenas1[0];
     }
     
     private static String getLDS(String premise1) {
         String [] cadenas1 = premise1.split("[v]");
-        //if(cadenas1[0] == cadenas1[1]){
-        //    premise1=cadenas1[0];
-        //}
         return ((cadenas1[0].compareTo(cadenas1[1])) == 0) ? cadenas1[0] : null;
     }
     
     private static ArrayList<String> changeSymbolIntoPremises(ArrayList<String> premises, String symbol) {
         ArrayList<String> premisesChanged = new ArrayList<>();
-        if(!premises.isEmpty())
-        {
+        if(!premises.isEmpty()) {
             for(int index = 0 ; index < premises.size() ; index++) {
                 premisesChanged.add(premises.get(index).replaceFirst(symbol, "»"));//reemplazar la simbolog�a de "entonces"
             }
@@ -231,6 +213,7 @@ public final class ValidateInferenceLaw {
     private static void addSolveStep(int index1, int index2, String conclusion, String inferenceLaw) {
         solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+","+index2+")");
     }
+    
     private static void addSolveSteps(int index1, String conclusion, String inferenceLaw) {
         solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+")");
     }

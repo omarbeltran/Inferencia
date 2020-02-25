@@ -9,45 +9,45 @@ import static java.util.regex.Pattern.matches;
 
 /**
  *
- * @author Omar Beltr�n, Javier Esteban
+ * @author Omar Beltrán, Javier Esteban
  */
 public final class Validation {
     
-    /**Este m�todo permite determinar si una string de caracteres cualesquiera est�
-     * conformada unicamente por car�cteres alfabeticos, los caracteres alfabeticos v�lidos son:
-     * - Letras may�sculas [A-Z]
-     * - Letras min�sculas [a-z]
+    /**Este método permite determinar si una string de caracteres cualesquiera está
+     * conformada unicamente por carácteres alfabeticos, los caracteres alfabeticos válidos son:
+     * - Letras mayúsculas [A-Z]
+     * - Letras minúsculas [a-z]
      * - Caracteres especiales como:
-     *      - Vocales con acentuaci�n
+     *      - Vocales con acentuación
      *      - Espacio en blanco
-     *      - Los caracteres �, �
+     *      - Los caracteres ñ, Ñ
      * @param string contiene la string de caracteres que se desea evaluar
-     * @return true si el par�metro de entrada satisface las reglas validadas
+     * @return true si el parámetro de entrada satisface las reglas validadas
      *         false en cualquier otro caso
      */
     private static boolean isStringName(String string)
     {
-        boolean flag = true;//se asume que la string es v�lida por tanto se deja por defecto true
+        boolean flag = true;//se asume que la string es válida por tanto se deja por defecto true
         int index;
         for (index = 0; index < string.length(); index++) {
             if((string.charAt(index)< 65 || string.charAt(index)> 90) && //LETRAS MAYUSCULAS 
-               (string.charAt(index)< 97 || string.charAt(index) > 122) &&//letras min�sculas 
-               (string.charAt(index) != '�' && string.charAt(index) != '�' && //la � � se considera caracter especial
-                string.charAt(index) != '�' && string.charAt(index) != '�' &&
-                string.charAt(index) != '�' && string.charAt(index) != '�' &&    
-                string.charAt(index) != '�' &&//validar las vocales con t�lde   
+               (string.charAt(index)< 97 || string.charAt(index) > 122) &&//letras minúsculas 
+               (string.charAt(index) != 'ñ' && string.charAt(index) != 'Ñ' && //la ñ Ñ se considera caracter especial
+                string.charAt(index) != 'á' && string.charAt(index) != 'é' &&
+                string.charAt(index) != 'í' && string.charAt(index) != 'ó' &&    
+                string.charAt(index) != 'ú' &&//validar las vocales con tílde   
                 string.charAt(index) != '.' &&//el punto debe ser permitido                    
                 string.charAt(index) != ' ')){//el espacio en blanco debe ser permitido                   
                     flag = false;//como no cumple la regla el retorno se cambia a false
-                    index = string.length()+1;//cuando se encuentra un car�cter inv�lido se debe finalizar el bucle
+                    index = string.length()+1;//cuando se encuentra un carácter inválido se debe finalizar el bucle
             }//end if 
         }//end for index 
         return flag;
     }//end isString
     
     /**
-     * Eval�a si los valores contenidos en el par�metro son solo digitos
-     * La expresi�n regular eval�a existencia de al menos una valor num�rico
+     * Evalúa si los valores contenidos en el parámetro son solo digitos
+     * La expresión regular evalúa existencia de al menos una valor numérico
      * @param id valor que se desea verificar
      * @return true si id contiene solo digitos
      *         false en cualquier otro caso
@@ -59,33 +59,33 @@ public final class Validation {
     
     private static boolean isValue(String string)
     {    
-        boolean flag = true;//se asume que la string es v�lida por tanto se deja por defecto true
+        boolean flag = true;//se asume que la string es válida por tanto se deja por defecto true
         int index;
         for (index = 0; index < string.length(); index++) {
-            if((string.charAt(index) < 47 || string.charAt(index) > 57) && //acepta n�meros
+            if((string.charAt(index) < 47 || string.charAt(index) > 57) && //acepta números
                string.charAt(index) == '.'){
                 flag = false;//como no cumple la regla el retorno se cambia a false
-                index = string.length()+1;//cuando se encuentra un carácter inv�lido se debe finalizar el bucle
+                index = string.length()+1;//cuando se encuentra un carácter inválido se debe finalizar el bucle
             }    
         }
         return flag;
     }
     
     private boolean isStringAlphaNumeric(String string){
-        boolean flag = true;//se asume que la string es v�lida por tanto se deja por defecto true
+        boolean flag = true;//se asume que la string es válida por tanto se deja por defecto true
         int index;
         for (index = 0; index < string.length(); index++) {
-            if((string.charAt(index) < 47 || string.charAt(index) > 57) && //acepta n�meros
+            if((string.charAt(index) < 47 || string.charAt(index) > 57) && //acepta números
               ((string.charAt(index)< 65 || string.charAt(index)> 90) && //LETRAS MAYUSCULAS 
-               (string.charAt(index)< 97 || string.charAt(index) > 122) &&//letras min�sculas
-               (string.charAt(index) != '�' && string.charAt(index) != '�' && //la � � se considera caracter especial
-                string.charAt(index) != '�' && string.charAt(index) != '�' &&
-                string.charAt(index) != '�' && string.charAt(index) != '�' &&    
-                string.charAt(index) != '�' &&//validar las vocales con t�lde     
+               (string.charAt(index)< 97 || string.charAt(index) > 122) &&//letras minúsculas
+               (string.charAt(index) != 'ñ' && string.charAt(index) != 'Ñ' && //la ñ Ñ se considera caracter especial
+                string.charAt(index) != 'á' && string.charAt(index) != 'é' &&
+                string.charAt(index) != 'í' && string.charAt(index) != 'ó' &&     
+                string.charAt(index) != 'ú' &&//validar las vocales con tílde     
                 string.charAt(index) != '.' &&//el punto debe ser permitido                    
                 string.charAt(index) != ' '))){//el espacio en blanco debe ser permitido                   
                     flag = false;//como no cumple la regla el retorno se cambia a false
-                    index = string.length()+1;//cuando se encuentra un car�cter inv�lido se debe finalizar el bucle
+                    index = string.length()+1;//cuando se encuentra un carácter inválido se debe finalizar el bucle
             }//end if 
         }//end for index  
         return flag; 
@@ -103,6 +103,7 @@ public final class Validation {
     private static boolean isSintaxisPremise(String stringLaw) {
         return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))"),stringLaw);
     } 
+    
     /**-----------------------------BEGIN--------------------------------------
      * Methods for evalue the sintaxis of regular expresions used for define 
      * inference laws
@@ -141,10 +142,14 @@ public final class Validation {
     private static boolean isSintaxisLDS(String stringLaw) {
         return matches(("^[PQRST](v)([PQRST])"),stringLaw);
     }
-    /**------------------------------END--------------------------------------*/
+    //------------------------------END-------------------------------------
+    /** 
+     * @param stringLaw-
+     * @return */
     public static boolean verifyInferenceLaw(String stringLaw) {
         return isSintaxisInferenceLaw(stringLaw);
     }
+    
     public static boolean verifyDataInferenceLaw(String id, String law, String shortName, String name) {
         return isDigit(id) && isStringName(name) && isStringName(shortName);
     }
@@ -176,9 +181,11 @@ public final class Validation {
     public static boolean verifySintaxisLA(String expression) {
         return isSintaxisLA(expression);
     }
+    
     public static boolean verifySintaxisLS(String expression) {
         return isSintaxisLS(expression);
     }
+    
     public static boolean verifySintaxisLC(String expression) {
         return isSintaxisLC(expression);
     }
