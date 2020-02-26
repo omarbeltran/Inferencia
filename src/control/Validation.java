@@ -101,7 +101,8 @@ public final class Validation {
     }
     
     private static boolean isSintaxisPremise(String stringLaw) {
-        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))"),stringLaw);
+        return matches(("((^~?[PQRST])(((->|v|\\^)(~?[PQRST]))?))"),stringLaw) ||
+                matches(("(\\((~?[PQRST]))((((->|v|\\^)(~?[PQRST]))?))\\)(->|v|\\^)(~?[PQRST])"),stringLaw);
     } 
     
     /**-----------------------------BEGIN--------------------------------------
@@ -148,7 +149,7 @@ public final class Validation {
     }
     
     private static boolean isSintaxisDC(String stringLaw) {
-        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(^~?[PQRST])((->)(~?[PQRST]))(,)(^~?[PQRST])((v)(~?[PQRST]))"),stringLaw);
+        return matches(("(^~?[PQRST])((->)(~?[PQRST]))(,)(~?[PQRST])((->)(~?[PQRST]))(,)(~?[PQRST])((v)(~?[PQRST]))"),stringLaw);
     }
     //------------------------------END-------------------------------------
     /** 

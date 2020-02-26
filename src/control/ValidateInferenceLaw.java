@@ -50,7 +50,7 @@ public final class ValidateInferenceLaw {
     public static ArrayList<String> solveInference(ArrayList<String> premises, String conclusion){
         solveInferenceOnePremise(premises, conclusion);
         solveInferenceTwoPremise(premises, conclusion);
-        
+        solveInferenceThreePremise(premises, conclusion);
         return solveSteps;
     }
     
@@ -130,7 +130,8 @@ public final class ValidateInferenceLaw {
                 for(int index2 = index1+1 ; index2 < (premisesChanged.size())-1 ; index2++) {
                     for(int index3 = index2+1 ; index3 < (premisesChanged.size()) ; index3++) {
                         if(verifySintaxisDC(premises.get(index1)+","+premises.get(index2)+","+premises.get(index3))) {
-                            
+                            consequent = getDC(premisesChanged.get(index1), premisesChanged.get(index2), premisesChanged.get(index3));
+                            addSolveStep(index1+1, index2+1, index3+1,consequent, "DC");
                         }    
                     }
                 }
@@ -216,6 +217,12 @@ public final class ValidateInferenceLaw {
         return ((cadenas1[0].compareTo(cadenas1[1])) == 0) ? cadenas1[0] : null;
     }
     
+    private static String getDC(String premise1, String premise2, String premise3) {
+        String [] cadenas1 = premise1.split("[»]");//obtener cada una de las proposiciones que conforman la premisa
+        String [] cadenas2 = premise2.split("[»]");//obtener cada una de las proposiciones que conforman la premisa
+        return premise1+"v"+premise2;
+    }
+    
     private static ArrayList<String> changeSymbolIntoPremises(ArrayList<String> premises, String symbol) {
         ArrayList<String> premisesChanged = new ArrayList<>();
         if(!premises.isEmpty()) {
@@ -224,6 +231,10 @@ public final class ValidateInferenceLaw {
             }
         }
         return premisesChanged;
+    }
+    
+    private static void addSolveStep(int index1, int index2, int index3, String conclusion, String inferenceLaw) {
+        solveSteps.add(conclusion+ " "+inferenceLaw+ " ("+index1+","+index2+","+index3+")");
     }
     
     private static void addSolveStep(int index1, int index2, String conclusion, String inferenceLaw) {

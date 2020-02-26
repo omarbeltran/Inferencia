@@ -22,6 +22,6 @@ public class Inferencia {
         CIL.printAllInferenceLaw();//mostrar las leyes de inferencia que est� aceptando
         ControllerPremise CP = new ControllerPremise();
         CP.printAllPremise();
-        CP.solve("P");
+        CP.solve("P^Q");
     }
 }

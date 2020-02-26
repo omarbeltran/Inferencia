@@ -25,7 +25,7 @@ public class ControllerPremise {
     
     private void loadDefaultPremise() {
         
-        Premise premise1 = new Premise(1, "P->S");
+        /*Premise premise1 = new Premise(1, "P->S");
         if(verifyDataPremise(premise1.getIdPremise(), premise1.getExpression())) {
             addPremise(premise1);
         }
@@ -98,6 +98,25 @@ public class ControllerPremise {
         Premise premise15 = new Premise(15, "(S^P)->~R");
         if(verifyDataPremise(premise15.getIdPremise(), premise15.getExpression())) {
             addPremise(premise15);
+        }*/
+        Premise premise1 = new Premise(1, "(Q^P)vR");
+        if(verifyDataPremise(premise1.getIdPremise(), premise1.getExpression())) {
+            addPremise(premise1);
+        }
+        
+        Premise premise2 = new Premise(2, "S->~R");
+        if(verifyDataPremise(premise2.getIdPremise(), premise2.getExpression())) {
+            addPremise(premise2);
+        }
+        
+        Premise premise3 = new Premise(3, "T->~R");
+        if(verifyDataPremise(premise3.getIdPremise(), premise3.getExpression())) {
+            addPremise(premise3);
+        }
+        
+        Premise premise4 = new Premise(4, "SvT");
+        if(verifyDataPremise(premise4.getIdPremise(), premise4.getExpression())) {
+            addPremise(premise4);
         }
     }
 
@@ -154,6 +173,7 @@ public class ControllerPremise {
     }
 
     public void solve(String conclusion) {
+        
         ArrayList<String> premisesString = new ArrayList<>();
         Premise premise;
         Iterator it = premises.iterator();
