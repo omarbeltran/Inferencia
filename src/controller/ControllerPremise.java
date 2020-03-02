@@ -6,6 +6,7 @@
 package Controller;
 
 import static control.ValidateInferenceLaw.solveInference;
+import static control.ValidateInferenceLaw.solverInference;
 import static control.Validation.verifyDataPremise;
 import entities.Premise;
 import java.util.ArrayList;
@@ -171,7 +172,7 @@ public class ControllerPremise {
             }    
         }       
     }
-
+    
     public void solve(String conclusion) {
         
         ArrayList<String> premisesString = new ArrayList<>();
@@ -180,9 +181,10 @@ public class ControllerPremise {
         while(it.hasNext()) {
             premise = (Premise)it.next();//casting del iterador al objeto Premise
             premisesString.add(premise.getExpression());
-        }    
+        }   
+        System.out.println("\n\nDEMOSTRAR "+conclusion);
         System.out.println("\n\nSOLUCION");
-        ArrayList<String> solveSteps = solveInference(premisesString, conclusion);
+        ArrayList<String> solveSteps = solverInference(premisesString, conclusion);
         for(int index = 0 ; index < solveSteps.size() ; index++) {
             System.out.println(solveSteps.get(index));
         }

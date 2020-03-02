@@ -122,7 +122,7 @@ public final class Validation {
     }
     
     private static boolean isSintaxisMTP(String stringLaw) {
-        return matches(("(^[PQRST])((v)([PQRST]))(,)(~[PQRST])"),stringLaw);
+        return matches(("(\\(?(~?[PQRST])(((->|v|\\^)(~?[PQRST]))?)\\)?)(,)(~[PQRST])"),stringLaw);
     }
     
     private static boolean isSintaxisLA(String stringLaw) {
@@ -137,11 +137,11 @@ public final class Validation {
     }
     
     private static boolean isSintaxisConm(String stringLaw) {
-        return matches(("^[PQRST](v)([PQRST])"),stringLaw);
+        return matches(("(\\(?(~?[PQRST])(((v|\\^)(~?[PQRST]))?)\\)?)"),stringLaw);
     }
     
     private static boolean isSintaxisLDS(String stringLaw) {
-        return matches(("^[PQRST](v)([PQRST])"),stringLaw);
+        return matches(("^~?[PQRST](v)(~?[PQRST])"),stringLaw);
     }
     
     private static boolean isSintaxisSH(String stringLaw) {
